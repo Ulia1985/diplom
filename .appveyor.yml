@@ -1,6 +1,6 @@
 image: Ubuntu2004
 
-stack: jdk 11
+stack: jdk 11, docker
 
 branches:
   only:
@@ -8,9 +8,42 @@ branches:
 
 build: off
 
-install:
-  - java -jar ./artifacts/aqa-shop.jar &
-  - chmod +x gradlew
+environment:
+  matrix:
+    - job_name: msql
+    - job_name: psql
 
-build_script:
-  - ./gradlew test --info
+for:
+  -
+    matrix:
+      only:
+        - job_name: msql
+
+    install:
+      - docker compose down &
+      - sleep 10s
+      - docker compose up &
+      - sleep 1m
+
+    build_script:
+      - chmod +x gradlew
+      - ./gradlew clean test
+
+  -
+    matrix:
+      only:
+        - job_name: psql
+        - job_depends_on: msql
+
+
+    install:
+      - docker compose down &
+      - sleep 10s
+      - docker compose up &
+      - sleep 1m
+
+
+    build_script:
+      - chmod +x gradlew
+      - ./gradlew clean test
+

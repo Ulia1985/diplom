@@ -19,6 +19,7 @@ public class WebServiseTest {
 
     @AfterAll
     static void stopData() {
+
         SelenideLogger.removeListener("allure");
     }
 

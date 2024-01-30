@@ -1,6 +1,6 @@
 spring.credit-gate.url=http://localhost:9999/credit
 spring.payment-gate.url=http://localhost:9999/payment
-spring.datasource.url=jdbc:postgresql://localhost:5432/psgl
+server.port=8080
+spring.datasource.url=jdbc:postgresql://localhost:5432/psql
 spring.datasource.username=app
 spring.datasource.password=pass
-server.port=8080
