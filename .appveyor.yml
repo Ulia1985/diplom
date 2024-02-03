@@ -29,7 +29,8 @@ for:
 
     build_script:
       - chmod +x gradlew
-      - ./gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/msql -Dschemas=msql -Dselenide.headless=true
+      - ./gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app -Dschemas=msql -Dselenide.headless=true -allowPublicKeyRetrieval=true
+
 
   -
     matrix:
@@ -49,5 +50,5 @@ for:
 
     build_script:
       - chmod +x gradlew
-      - ./gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/psql -Dschemas=public -Dselenide.headless=true
+      - ./gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app -Dschemas=public -Dselenide.headless=true
 
