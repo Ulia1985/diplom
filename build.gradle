@@ -41,4 +41,5 @@ test {
     systemProperty 'db.user', System.getProperty('db.user', 'app')
     systemProperty 'db.password', System.getProperty('db.password', 'pass')
     systemProperty 'schemas', System.getProperty('schemas')
+
 }
