@@ -24,12 +24,13 @@ for:
       - sleep 10s
       - docker compose up &
       - sleep 1m
-      - java -jar artifacts/aqa-shop.jar --spring.profiles.active=msql &
+      - java "-Dspring.datasourse.url=jdbc:mysql://localhost:3306/app" -jar artifacts/
+        aqa-shop.jar
       - sleep 20s
 
     build_script:
       - chmod +x gradlew
-      - ./gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app -Dschemas=msql -Dselenide.headless=true -allowPublicKeyRetrieval=true
+      - ./gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app -Dschemas=msql -Dselenide.headless=true
 
 
   -
@@ -44,7 +45,8 @@ for:
       - sleep 10s
       - docker compose up &
       - sleep 1m
-      - java -jar artifacts/aqa-shop.jar --spring.profiles.active=psql &
+      - java "-Dspring.datasourse.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/
+        aqa-shop.jar
       - sleep 20s
 
 
