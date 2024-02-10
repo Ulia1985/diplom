@@ -1,15 +1,17 @@
 package ru.netology.data;
 
 
-import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import ru.netology.data.constructor.CreditConstructor;
 import ru.netology.data.constructor.PaymentConstructor;
+import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
 
 public class Data {
     private Data() {
@@ -22,8 +24,8 @@ public class Data {
         String user = System.getProperty("db.user");
         String password = System.getProperty("db.password");
         return DriverManager.getConnection(url, user, password);
-    }
 
+    }
     @SneakyThrows
     public static void cleanUpDB() {
         var runner = new QueryRunner();

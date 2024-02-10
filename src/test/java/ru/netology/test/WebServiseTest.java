@@ -41,8 +41,8 @@ public class WebServiseTest {
     }
 
     @Test
-    @DisplayName("Purchasing a tour. Year more than two years")
-    void yearMoreTwoYearsDebit() {
+    @DisplayName("Purchasing a tour. Year more than five years")
+    void yearMoreFiveYearsDebit() {
         var dashboardPage = new DashboardPage();
         dashboardPage.getBayTourButton(DataHelper.generateUser("number2"));
         dashboardPage.validPopUp();
@@ -304,8 +304,8 @@ public class WebServiseTest {
     }
 
     @Test
-    @DisplayName("Purchasing a tour on credit. Year more than two years")
-    void YearMoreTwoYearsCredit() {
+    @DisplayName("Purchasing a tour on credit. Year more than five years")
+    void YearMoreFiveYearsCredit() {
         var dashboardPage = new DashboardPage();
         dashboardPage.getCreditTourButton(DataHelper.generateUser("number2"));
         dashboardPage.validPopUp();
