@@ -1,111 +1,85 @@
 package ru.netology.page;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.DataHelper;
+import org.junit.jupiter.api.DisplayName;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
 
-    private SelenideElement tourName = $x("//h2[contains (text(), 'Путешествие дня')]");
-    private SelenideElement tourPic = $x("//img[@alt='Марракэш']");
-    private SelenideElement headingInCredit = $x("//h3[contains (text(), 'Кредит по данным карты')]");
-    private SelenideElement headingCardPayment = $x("//h3[contains (text(), 'Оплата по карте')]");
-    private SelenideElement bayButton = $x("//button[.//*[(text()='Купить')]]");
-    private SelenideElement creditButton = $x("//button[.//*[(text()='Купить в кредит')]]");
-    private SelenideElement numberField = $x("//span[(text()='Номер карты')]/..//input");
-    private SelenideElement numberFieldFilledIncorrectly = $x("//span[(text()='Номер карты')]/..//span[@class='input__sub']");
-    private SelenideElement monthField = $x("//span[(text()='Месяц')]/..//input");
-    private SelenideElement monthFieldFilledIncorrectly = $x("//span[(text()='Месяц')]/..//span[@class='input__sub']");
-    private SelenideElement yearField = $x("//span[(text()='Год')]/..//input");
-    private SelenideElement yearFieldFilledIncorrectly = $x("//span[(text()='Год')]/..//span[@class='input__sub']");
-    private SelenideElement nameField = $x("//span[(text()='Владелец')]/..//input");
-    private SelenideElement nameFieldFilledIncorrectly = $x("//span[(text()='Владелец')]/..//span[@class='input__sub']");
-    private SelenideElement securityCodesField = $x("//span[(text()='CVC/CVV')]/..//input");
-    private SelenideElement securityCodesFieldFilledIncorrectly = $x("//span[(text()='CVC/CVV')]/..//span[@class='input__sub']");
-    private SelenideElement sendButton = $x("//button[.//*[(text()='Продолжить')]]");
-    private SelenideElement iconTitleGood = $x("//div[(text()='Успешно')]");
-    private SelenideElement iconTextGood = $x("//div[(text()='Успешно')]/..//div[@class='notification__content']");
-    private SelenideElement iconGood = $x("//div[(text()='Успешно')]/..//button");
-    private SelenideElement iconTitleBad = $x("//div[(text()='Ошибка')]");
-    private SelenideElement iconTextBad = $x("//div[(text()='Ошибка')]/..//div[@class='notification__content']");
-    private SelenideElement iconBad = $x("//div[(text()='Ошибка')]/..//button");
+    private final SelenideElement tourName = $(byText("Путешествие дня"));
+    private final SelenideElement bayButton = $$("button.button").findBy(text("Купить"));
+    private final SelenideElement creditButton = $$("button.button").findBy(text("Купить в кредит"));
+    private final SelenideElement card = $(byText("Оплата по карте"));
+    private final SelenideElement creditCard = $(byText("Кредит по данным карты"));
+    private final SelenideElement numberFieldFilledIncorrectly = $$(".form-field").findBy(text("Номер карты")).find(".input__control");
+    private final SelenideElement numderFieldMonth = $$(".form-field .input-group__input-case").findBy(text("Месяц")).find(".input__control");
+    private final SelenideElement yearField = $$(".form-field .input-group__input-case").findBy(text("Год")).find(".input__control");
+    private final SelenideElement nameField = $$(".form-field .input-group__input-case").findBy(text("Владелец")).find(".input__control");
+    private final SelenideElement securityCodesField = $$(".form-field .input-group__input-case").findBy(text("CVC/CVV")).find(".input__control");
+    private final SelenideElement sendButton = $$(".button__text").findBy(text("Продолжить"));
+    private final SelenideElement iconTextGood = $(".notification_status_ok .notification__content");
+    private final SelenideElement iconTitleBad = $(".notification_status_error .notification__content");
+    public final SelenideElement invalidFormat = $$(".form-field .input__sub").findBy(text("Неверный формат"));
+    public final SelenideElement fieldIsRequired = $$(".form-field .input__sub").findBy(text("Поле обязательно для заполнения"));
+    public final SelenideElement incorrectExpirationDate = $$(".form-field .input__sub").findBy(text("Неверно указан срок действия карты"));
+    public final SelenideElement theCardIsExpired = $$(".form-field .input__sub").findBy(text("Истёк срок действия карты"));
 
-    public DashboardPage() {
-        tourName.shouldBe(visible);
-        tourPic.isImage();
-    }
 
-    public void getBayTourButton(DataHelper.CardDetails user) {
+
+    public void bayButtonPage() {
+        tourName.shouldHave(visible);
         bayButton.click();
-        headingCardPayment.shouldBe(visible);
-        cardDataEntry(user);
+        card.shouldHave(visible);
     }
 
-    public void getCreditTourButton(DataHelper.CardDetails user) {
+    public void CreditPage() {
+        tourName.shouldHave(visible);
         creditButton.click();
-        headingInCredit.shouldBe(visible);
-        cardDataEntry(user);
+        creditCard.shouldHave(visible);
     }
 
-    public void cardDataEntry(DataHelper.CardDetails user) {
-        numberField.setValue(user.getNumbercard());
-        monthField.setValue(user.getMonth());
-        yearField.setValue(user.getYear());
-        nameField.setValue(user.getName());
-        securityCodesField.setValue(user.getCvc());
+    public void cardNumber(String getCardNumber) {
+        numberFieldFilledIncorrectly.setValue(String.valueOf(getCardNumber));
+    }
+
+    public void monthNumber(String getMonthNumber) {
+        numderFieldMonth.setValue(String.valueOf(getMonthNumber));
+    }
+
+    public void yearNumber(String getYears) {
+        yearField.setValue(String.valueOf(getYears));
+    }
+
+    public void fullName(String getName) {
+        nameField.setValue(String.valueOf(getName));
+    }
+
+    public void CVC(String getCVC) {
+        securityCodesField.setValue(String.valueOf(getCVC));
+    }
+
+    public void buttonContinue() {
         sendButton.click();
     }
 
-    public void validPopUp() {
-        iconTitleGood.shouldBe(Condition.visible, Duration.ofSeconds(15));
-        iconTextGood.shouldHave(Condition.text("Операция одобрена Банком.")).shouldBe(Condition.visible);
-        iconGood.click();
+
+    @DisplayName("Операция одобрена банком.")
+    public void iconTextGood(String expectedText) {
+        iconTextGood
+                .shouldBe(visible, Duration.ofSeconds(15))
+                .shouldHave(exactText(expectedText)).shouldBe(visible);
     }
 
-    public void noValidPopUp() {
-        iconTitleBad.shouldBe(Condition.visible, Duration.ofSeconds(15));
-        iconTextBad.shouldHave(Condition.text("Ошибка! Банк отказал в проведении операции.")).shouldBe(Condition.visible);
-        iconBad.click();
-    }
-
-    public void numberNoCorrect() {
-        numberFieldFilledIncorrectly.shouldHave(Condition.text("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void monthNoCorrect() {
-        monthFieldFilledIncorrectly.shouldHave(Condition.text("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void monthCardExpired() {
-        monthFieldFilledIncorrectly.shouldHave(Condition.text("Истёк срок действия карты")).shouldBe(Condition.visible);
-    }
-
-    public void monthInvalidCardDate() {
-        monthFieldFilledIncorrectly.shouldHave(Condition.text("Неверно указан срок действия карты")).shouldBe(Condition.visible);
-    }
-
-    public void yearNotCorrect() {
-        yearFieldFilledIncorrectly.shouldHave(Condition.text("Неверный формат")).shouldBe(Condition.visible);
-    }
-
-    public void yearCardExpired() {
-        yearFieldFilledIncorrectly.shouldHave(Condition.text("Истёк срок действия карты")).shouldBe(Condition.visible);
-    }
-
-    public void yearInvalidCardDate() {
-        yearFieldFilledIncorrectly.shouldHave(Condition.text("Неверно указан срок действия карты")).shouldBe(Condition.visible);
-    }
-
-    public void nameNoCorrect() {
-        nameFieldFilledIncorrectly.shouldHave(Condition.text("Поле обязательно для заполнения")).shouldBe(Condition.visible);
-    }
-
-    public void securityCodesNoCorrect() {
-        securityCodesFieldFilledIncorrectly.shouldHave(Condition.text("Неверный формат")).shouldBe(Condition.visible);
+    @DisplayName("Ошибка! Банк отказал в проведении операции.")
+    public void iconTitleBad(String expectedText) {
+        iconTitleBad
+                .shouldBe(visible, Duration.ofSeconds(15))
+                .shouldHave(exactText(expectedText)).shouldBe(visible);
     }
 }

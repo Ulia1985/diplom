@@ -1,56 +1,26 @@
-image: Ubuntu2004
+name: Java CI with Gradle
 
-stack: jdk 11, docker
+on: [push, pull_request]
 
-branches:
-  only:
-    - main
+jobs:
+  build:
 
-build: off
+    runs-on: ubuntu-latest
 
-environment:
-  matrix:
-    - job_name: msql
-    - job_name: psql
-
-for:
-  -
-    matrix:
-      only:
-        - job_name: msql
-
-    install:
-      - docker compose down &
-      - sleep 10s
-      - docker compose up &
-      - sleep 1m
-      - java "-Dspring.datasourse.url=jdbc:mysql://localhost:3306/app" -jar artifacts/
-        aqa-shop.jar
-      - sleep 20s
-
-    build_script:
-      - chmod +x gradlew
-      - ./gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app -Dschemas=msql -Dselenide.headless=true
-
-
-  -
-    matrix:
-      only:
-        - job_name: psql
-        - job_depends_on: msql
-
-
-    install:
-      - docker compose down &
-      - sleep 10s
-      - docker compose up &
-      - sleep 1m
-      - java "-Dspring.datasourse.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/
-        aqa-shop.jar
-      - sleep 20s
-
-
-    build_script:
-      - chmod +x gradlew
-      - ./gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app -Dschemas=public -Dselenide.headless=true
-
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Container start
+        run: docker-compose up --build &
+      - name: Waiting for сontainer start
+        run: sleep 30
+      - name: Start SUT
+        run: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar &
+      - name: Build with Gradle
+        run: ./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app" --info -Dselenide.headless=true
