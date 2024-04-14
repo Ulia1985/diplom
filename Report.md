@@ -1,12 +1,15 @@
                                                     Количество тест-кейсов
 
 Выполнено 38 автоматизированных тест-кейсов с СУБД MySQL;
+
 Выполнено 38 автоматизированных тест-кейсов с СУБД PostgreSQL.
 
-Процент успешных и не успешных тест-кейсов
+
+                                        Процент успешных и не успешных тест-кейсов
 
 При взаимодействии с СУБД MySQL:
-9 успешных тест-кейсов – что составляет 47,36 %;
+
+                                      9 успешных тест-кейсов – что составляет 47,36 %;
 
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/7ed57f1f-d6a8-4b56-aabe-b17359746258)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/6c6fe774-6019-4986-8300-9d243c2cfb74)
@@ -18,7 +21,7 @@
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/4ca8c006-0ebd-4a7e-98f5-4f006321f20a)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/55bc5be3-6b92-47ea-ab4f-cd0249df2619)
 
-10 не успешных тест-кейсов – что составляет 52,64 %.
+                                  10 не успешных тест-кейсов – что составляет 52,64 %.
 
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/4ac029bc-279a-4748-a99f-127e63666690)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/903cddc8-f890-4bad-92f8-7a76906f553c)
@@ -32,7 +35,8 @@
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/25bbcb51-bb21-4898-b9af-3c0b5e149dbf)
 
 При взаимодействии с СУБД PostgreSQL:
-9 успешных тест-кейсов – что составляет 47,36 %;
+
+                            9 успешных тест-кейсов – что составляет 47,36 %;
 
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/5beff8db-03cd-42ae-b73c-01fdcc722df2)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/28f52f9c-39d1-4223-aed8-7cae7575d06e)
@@ -44,7 +48,7 @@
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/75e31cdf-279e-41a7-85ee-61b6d34adcb9)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/32d56f1f-692f-40d4-a018-56cabd3887b6)
 
-10 не успешных тест-кейсов – что составляет 52,64 %.
+                        10 не успешных тест-кейсов – что составляет 52,64 %.
 
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/ea5c09a2-5117-4f13-841e-dc58efd75647)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/b1551ca1-27bc-440d-8de6-c85c33b1594d)
@@ -57,11 +61,14 @@
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/b936725e-e94b-45b0-b1bd-c65f037f6ef4)
 ![image](https://github.com/Ulia1985/diplom/assets/142724975/256afe9d-360a-4b23-8065-5a0967c9ce7f)
 
-Общие рекомендации
+                                  Общие рекомендации
 
 Приложить техзадание на комплексный сервис с требованиями к дизайну, ограничениям по заполнению полей форм и полей с сообщениями об ошибках, к формированию полей таблиц БД;
+
 Скорректировать название курорта на правильное - Марракеш;
+
 Добавить селекторы для тестирования (типа: data-test-id);
+
 Устарнить баги и провести повторне тестирование.
 
 ![img.png](img.png)
