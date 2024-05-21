@@ -33,6 +33,9 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-selenide:2.21.0'
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'com.google.code.gson:gson:2.10.1'
+    testImplementation 'commons-configuration:commons-configuration:1.10'
+
+
 }
 
 test {

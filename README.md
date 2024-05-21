@@ -10,7 +10,7 @@
 3. Во вкладке Terminal (Local) приложения IntelliJ IDEA, ввести в командную строку команду: docker compose up –-build
 
 Запуск Веб-сервиса для работы с MySQL
-Открыть вторую вкладку Terminal (Local (2)) приложения IntelliJ IDEA, ввести в командную строку команду: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar.
+Открыть вторую вкладку Terminal (Local (2)) приложения IntelliJ IDEA, ввести в командную строку команду: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar
 
 Запуск тестов для работы с MySQL
 Открыть третью вкладку Terminal (Local (3)) приложения IntelliJ IDEA, ввести в командную строку команду: ./gradlew clean test -D db.url=jdbc:mysql ://localhost:3306/ msql -D schemas=msql

@@ -124,7 +124,6 @@ public class WebServiseTestPayment {
         assertAll(() -> assertEquals(expectedStatus, actualStatusPayment),
                 () -> assertEquals(expectedId, actualStatusOrder_entityPayment));
     }
-
     @Test
     @DisplayName("Заполнение поля \"Месяц\" значением 00")
     void month00() {
